@@ -122,6 +122,7 @@ public class Gameur implements Serializable {
         try (Scanner scan = new Scanner(System.in)) {
             System.out.print("Case: ");
             String res = scan.nextLine();
+            scan.close();
             return res;
         }
     }
@@ -135,9 +136,12 @@ public class Gameur implements Serializable {
      */
 
     public void attack(int[][] ech) {
+    	Scanner scan = new Scanner(System.in);
         System.out.println("Case où se trouve la piece à déplacer???");
-        String co = this.choixCase();
-        int y = this.choixColonne(co);
+        // String co = this.choixCase();
+        System.out.print("Case: ");
+        String co = scan.nextLine();
+        int y = this.choixColonne(co.substring(0));
         int x = this.choixLigne(co.substring(1));
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             System.out.println("Aucune case correspondante");
@@ -145,7 +149,9 @@ public class Gameur implements Serializable {
         }
         if (this.mesPieces.getIds().contains(ech[x][y])) {
             System.out.println("Case de destination???");
-            String cd = this.choixCase();
+            //String cd = this.choixCase();
+            System.out.print("Case: ");
+            String cd = scan.nextLine();
             int z = this.choixColonne(cd);
             int w = this.choixLigne(cd.substring(1));
             if (w < 0 || w > 7 || z < 0 || z > 7) {
